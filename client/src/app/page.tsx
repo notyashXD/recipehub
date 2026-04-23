@@ -87,12 +87,13 @@ export default function HomePage() {
         </motion.div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 relative z-20">
+      <main className="max-w-6xl mx-auto px-6 relative z-30">
         <section className="pt-16 pb-20 grid lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="relative z-50"
           >
             <motion.span 
               initial={{ opacity: 0 }}
@@ -111,8 +112,8 @@ export default function HomePage() {
               RecipeHub helps you discover recipes, plan meals, and cook with confidence using AI that
               understands your pantry.
             </p>
-            <div className="flex flex-wrap gap-4 mt-10">
-              <Link href={user ? '/cook' : '/signup'} className="btn-primary inline-flex items-center justify-center gap-3 px-10 py-4 text-lg w-full sm:w-auto hover:scale-105 active:scale-95 transition-all shadow-xl shadow-brand/25">
+            <div className="flex flex-wrap gap-4 mt-10 relative z-50">
+              <Link href={user ? '/cook' : '/signup'} className="btn-primary inline-flex items-center justify-center gap-3 px-10 py-4 text-lg w-full sm:w-auto hover:scale-105 active:scale-95 transition-all shadow-xl shadow-brand/25 pointer-events-auto">
                 {user ? 'Continue cooking' : 'Start for free'} <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
@@ -123,7 +124,7 @@ export default function HomePage() {
             </div>
           </motion.div>
 
-          <div className="relative h-[480px] hidden lg:block">
+          <div className="relative h-[480px] hidden lg:block pointer-events-none">
             {FLOATING_RECIPES.map((recipe, index) => {
               const positions = [
                 { left: '0%', top: '20px' },
@@ -138,7 +139,7 @@ export default function HomePage() {
                   key={recipe.title}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1, y: [0, -15, 0] }}
-                  whileHover={{ scale: 1.05, zIndex: 40 }}
+                  whileHover={{ scale: 1.05, zIndex: 60 }}
                   transition={{ 
                     y: {
                       delay: index * 0.2, 
@@ -150,7 +151,7 @@ export default function HomePage() {
                     opacity: { duration: 0.5, delay: index * 0.1 },
                     scale: { duration: 0.5, delay: index * 0.1 }
                   }}
-                  className="absolute card w-56 overflow-hidden shadow-2xl border-white/5 cursor-pointer backdrop-blur-md"
+                  className="absolute card w-56 overflow-hidden shadow-2xl border-white/5 cursor-pointer backdrop-blur-md pointer-events-auto"
                   style={{ left: pos.left, top: pos.top }}
                 >
                   <div className="h-32 w-full bg-surface-muted relative overflow-hidden">
