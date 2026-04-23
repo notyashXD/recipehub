@@ -138,16 +138,17 @@ export default function HomePage() {
                   key={recipe.title}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1, y: [0, -15, 0] }}
-                  whileHover={{ scale: 1.05, zIndex: 30 }}
+                  whileHover={{ scale: 1.05, zIndex: 40 }}
                   transition={{ 
-                    animate: {
+                    y: {
                       delay: index * 0.2, 
                       duration: 6 + index, 
                       repeat: Infinity, 
                       repeatType: 'mirror',
                       ease: "easeInOut"
                     },
-                    initial: { duration: 0.5 }
+                    opacity: { duration: 0.5, delay: index * 0.1 },
+                    scale: { duration: 0.5, delay: index * 0.1 }
                   }}
                   className="absolute card w-56 overflow-hidden shadow-2xl border-white/5 cursor-pointer backdrop-blur-md"
                   style={{ left: pos.left, top: pos.top }}
