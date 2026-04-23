@@ -63,48 +63,54 @@ export default function HomePage() {
         />
       </div>
 
-      <header className="max-w-6xl mx-auto px-6 pt-8 pb-2 relative z-20 flex items-center justify-between">
+      <header className="max-w-6xl mx-auto px-6 pt-10 pb-4 relative z-20 flex items-center justify-between">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-3 cursor-pointer group"
+          className="flex items-center gap-4 cursor-pointer group"
         >
           <motion.div 
-            whileHover={{ rotate: 15, scale: 1.1 }}
-            className="w-10 h-10 rounded-xl bg-brand/20 border border-brand/30 flex items-center justify-center group-hover:bg-brand/30 transition-colors"
+            whileHover={{ rotate: -10, scale: 1.1 }}
+            className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand to-orange-600 p-[1px] shadow-lg shadow-brand/20"
           >
-            <ChefHat className="w-5 h-5 text-brand" />
+            <div className="w-full h-full rounded-2xl bg-surface flex items-center justify-center group-hover:bg-transparent transition-all duration-300">
+              <span className="text-xl font-display font-black text-white group-hover:scale-110 transition-transform">RH</span>
+            </div>
           </motion.div>
-          <span className="font-display text-2xl text-white font-bold tracking-tight">RecipeHub</span>
+          <div className="flex flex-col">
+            <span className="font-display text-2xl text-white font-extrabold tracking-tight leading-none">RecipeHub</span>
+            <span className="text-[10px] text-brand font-bold uppercase tracking-[0.2em] mt-1 opacity-80">Smart Kitchen</span>
+          </div>
         </motion.div>
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2"
+          className="flex items-center gap-4"
         >
-          <Link href="/login" className="btn-ghost py-2 px-4 text-sm">Sign in</Link>
-          <Link href="/signup" className="btn-primary py-2 px-4 text-sm shadow-lg shadow-brand/20">Get started</Link>
+          <Link href="/login" className="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Sign in</Link>
+          <Link href="/signup" className="btn-primary py-2.5 px-6 text-sm shadow-xl shadow-brand/20 border border-white/10">Get started</Link>
         </motion.div>
       </header>
 
       <main className="max-w-6xl mx-auto px-6 relative z-20">
-        <section className="pt-16 pb-20 grid lg:grid-cols-2 gap-10 items-center">
+        <section className="pt-20 pb-24 grid lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
           >
-            <motion.span 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 }}
-              className="badge bg-brand/10 text-brand border border-brand/25 mb-6 px-4 py-1"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md"
             >
-              Cook smarter, waste less
-            </motion.span>
-            <h1 className="font-display text-5xl md:text-7xl text-white font-bold leading-[1.1] tracking-tight">
-              Your AI <br /> 
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-orange-400">kitchen copilot.</span>
+              <Sparkles className="w-4 h-4 text-brand" />
+              <span className="text-xs font-bold text-gray-300 uppercase tracking-widest">Next-Gen Cooking</span>
+            </motion.div>
+            <h1 className="font-display text-6xl md:text-8xl text-white font-extrabold leading-[0.95] tracking-tight">
+              AI kitchen <br /> 
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-orange-500 to-orange-400">copilot.</span>
             </h1>
             <p className="text-gray-400 text-lg mt-6 max-w-xl leading-relaxed">
               <span className="font-semibold text-white/90">From ingredients to incredible meals.</span>{' '}
