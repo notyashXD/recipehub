@@ -6,10 +6,10 @@ import ThemeToggle from '@/components/shared/ThemeToggle';
 import { useAuthStore } from '@/stores/authStore';
 
 const FLOATING_RECIPES = [
-  { title: 'Butter Chicken', time: '45m', tag: 'Indian', image: 'https://images.unsplash.com/photo-1603894584214-5d0420e14a28?w=800' },
-  { title: 'Mushroom Risotto', time: '40m', tag: 'Italian', image: 'https://images.unsplash.com/photo-1534422298391-e4f8c170db06?w=800' },
-  { title: 'Greek Salad', time: '10m', tag: 'Mediterranean', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800' },
-  { title: 'Chocolate Lava Cake', time: '27m', tag: 'French', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800' },
+  { title: 'Butter Chicken', time: '45m', tag: 'Indian', image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&v=2' },
+  { title: 'Greek Salad', time: '10m', tag: 'Mediterranean', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&v=2' },
+  { title: 'Mushroom Risotto', time: '40m', tag: 'Italian', image: 'https://images.unsplash.com/photo-1476124369491-e7addf5db171?w=800&v=2' },
+  { title: 'Chocolate Lava Cake', time: '27m', tag: 'French', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&v=2' },
 ];
 
 const FEATURES = [
@@ -114,8 +114,6 @@ export default function HomePage() {
                       src={recipe.image} 
                       alt={recipe.title} 
                       className="h-full w-full object-cover"
-                      crossOrigin="anonymous"
-                      loading="eager"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
