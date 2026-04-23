@@ -110,7 +110,13 @@ export default function HomePage() {
                   style={{ left: pos.left, top: pos.top }}
                 >
                   <div className="h-28 w-full bg-surface-muted relative">
-                    <img src={recipe.image} alt={recipe.title} className="h-full w-full object-cover" />
+                    <img 
+                      src={recipe.image} 
+                      alt={recipe.title} 
+                      className="h-full w-full object-cover"
+                      crossOrigin="anonymous"
+                      loading="eager"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
                   <div className="p-3 bg-surface-card">
@@ -145,7 +151,7 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-      </main>n>
+      </main>
     </div>
   );
 }
