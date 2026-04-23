@@ -87,29 +87,45 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative h-[420px] hidden md:block">
-            {FLOATING_RECIPES.map((recipe, index) => (
-              <motion.div
-                key={recipe.title}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: [0, -8, 0] }}
-                transition={{ delay: index * 0.12, duration: 5 + index, repeat: Infinity, repeatType: 'mirror' }}
-                className="absolute card w-56 overflow-hidden shadow-2xl"
-                style={{
-                  left: `${(index % 2) * 48 + (index === 3 ? 20 : 0)}%`,
-                  top: `${index * 20 + (index % 2 ? 20 : 0)}px`,
-                }}
-              >
-                <img src={recipe.image} alt={recipe.title} className="h-28 w-full object-cover" />
-                <div className="p-3">
-                  <p className="text-white font-semibold text-sm truncate">{recipe.title}</p>
-                  <div className="flex items-center justify-between mt-2 text-xs text-gray-400">
-                    <span>{recipe.tag}</span>
-                    <span>{recipe.time}</span>
+          <div className="relative h-[440px] hidden md:block">
+            {FLOATING_RECIPES.map((recipe, index) => {
+              const positions = [
+                { left: '5%', top: '20px' },
+                { left: '55%', top: '60px' },
+                { left: '15%', top: '210px' },
+                { left: '60%', top: '230px' },
+              ];
+              const pos = positions[index];
+
+              return (
+                <motion.div
+                  key={recipe.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: [0, -10, 0] }}
+                  transition={{ 
+                    delay: index * 0.15, 
+                    duration: 4 + index, 
+                    repeat: Infinity, 
+                    repeatType: 'mirror',
+                    ease: "easeInOut"
+                  }}
+                  className="absolute card w-52 overflow-hidden shadow-2xl border-surface-border/50"
+                  style={{ left: pos.left, top: pos.top }}
+                >
+                  <div className="h-28 w-full bg-surface-muted relative">
+                    <img src={recipe.image} alt={recipe.title} className="h-full w-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                  <div className="p-3 bg-surface-card">
+                    <p className="text-white font-semibold text-sm truncate">{recipe.title}</p>
+                    <div className="flex items-center justify-between mt-1 text-[10px] text-gray-400">
+                      <span>{recipe.tag}</span>
+                      <span>{recipe.time}</span>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </section>
 
