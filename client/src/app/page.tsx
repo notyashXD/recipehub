@@ -43,84 +43,127 @@ export default function HomePage() {
       <ThemeToggle className="absolute right-5 top-5 z-30" />
 
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-brand/20 blur-3xl" />
-        <div className="absolute top-40 -right-24 h-72 w-72 rounded-full bg-forest/20 blur-3xl" />
+        <motion.div 
+          animate={{ 
+            x: [0, 50, 0], 
+            y: [0, 30, 0],
+            scale: [1, 1.1, 1] 
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-brand/15 blur-[120px]" 
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -40, 0], 
+            y: [0, 60, 0],
+            scale: [1, 1.2, 1] 
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/2 -right-24 h-80 w-80 rounded-full bg-forest/15 blur-[100px]" 
+        />
       </div>
 
       <header className="max-w-6xl mx-auto px-6 pt-8 pb-2 relative z-20 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-brand/20 border border-brand/30 flex items-center justify-center">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="flex items-center gap-3 cursor-pointer group"
+        >
+          <motion.div 
+            whileHover={{ rotate: 15, scale: 1.1 }}
+            className="w-10 h-10 rounded-xl bg-brand/20 border border-brand/30 flex items-center justify-center group-hover:bg-brand/30 transition-colors"
+          >
             <ChefHat className="w-5 h-5 text-brand" />
-          </div>
-          <span className="font-display text-2xl text-white font-bold">RecipeHub</span>
-        </div>
-        <div className="flex items-center gap-2">
+          </motion.div>
+          <span className="font-display text-2xl text-white font-bold tracking-tight">RecipeHub</span>
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="flex items-center gap-2"
+        >
           <Link href="/login" className="btn-ghost py-2 px-4 text-sm">Sign in</Link>
-          <Link href="/signup" className="btn-primary py-2 px-4 text-sm">Get started</Link>
-        </div>
+          <Link href="/signup" className="btn-primary py-2 px-4 text-sm shadow-lg shadow-brand/20">Get started</Link>
+        </motion.div>
       </header>
 
       <main className="max-w-6xl mx-auto px-6 relative z-20">
-        <section className="pt-10 pb-14 grid lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <span className="badge bg-brand/10 text-brand border border-brand/25 mb-4">Cook smarter, waste less</span>
-            <h1 className="font-display text-5xl md:text-6xl text-white font-bold leading-tight">
-              Your AI kitchen copilot.
+        <section className="pt-16 pb-20 grid lg:grid-cols-2 gap-10 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.span 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="badge bg-brand/10 text-brand border border-brand/25 mb-6 px-4 py-1"
+            >
+              Cook smarter, waste less
+            </motion.span>
+            <h1 className="font-display text-5xl md:text-7xl text-white font-bold leading-[1.1] tracking-tight">
+              Your AI <br /> 
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand to-orange-400">kitchen copilot.</span>
             </h1>
-            <p className="text-gray-300 text-lg mt-5 max-w-xl">
-              <span className="font-semibold text-white">Brand motto: From ingredients to incredible meals.</span>{' '}
+            <p className="text-gray-400 text-lg mt-6 max-w-xl leading-relaxed">
+              <span className="font-semibold text-white/90">From ingredients to incredible meals.</span>{' '}
               RecipeHub helps you discover recipes, plan meals, and cook with confidence using AI that
               understands your pantry.
             </p>
-            <div className="flex flex-wrap gap-3 mt-7">
-              <Link href={user ? '/cook' : '/signup'} className="btn-primary inline-flex items-center justify-center gap-2 px-10 py-3 text-lg w-full sm:w-auto">
+            <div className="flex flex-wrap gap-4 mt-10">
+              <Link href={user ? '/cook' : '/signup'} className="btn-primary inline-flex items-center justify-center gap-3 px-10 py-4 text-lg w-full sm:w-auto hover:scale-105 active:scale-95 transition-all shadow-xl shadow-brand/25">
                 {user ? 'Continue cooking' : 'Start for free'} <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
-            <div className="mt-7 flex items-center gap-4 text-sm text-gray-400">
-              <span className="inline-flex items-center gap-1"><Flame className="w-4 h-4 text-orange-400" /> Daily streak tracking</span>
-              <span>•</span>
-              <span>AI recipes by your ingredients</span>
+            <div className="mt-10 flex items-center gap-6 text-sm text-gray-500">
+              <span className="inline-flex items-center gap-2"><Flame className="w-4 h-4 text-orange-500" /> Daily streaks</span>
+              <span className="w-1 h-1 rounded-full bg-gray-700" />
+              <span>AI Pantry Scanning</span>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative h-[440px] hidden md:block">
+          <div className="relative h-[480px] hidden lg:block">
             {FLOATING_RECIPES.map((recipe, index) => {
               const positions = [
-                { left: '5%', top: '20px' },
+                { left: '0%', top: '20px' },
                 { left: '55%', top: '60px' },
-                { left: '15%', top: '210px' },
-                { left: '60%', top: '230px' },
+                { left: '10%', top: '230px' },
+                { left: '60%', top: '260px' },
               ];
               const pos = positions[index];
 
               return (
                 <motion.div
                   key={recipe.title}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: [0, -10, 0] }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1, y: [0, -15, 0] }}
+                  whileHover={{ scale: 1.05, zIndex: 30 }}
                   transition={{ 
-                    delay: index * 0.15, 
-                    duration: 4 + index, 
-                    repeat: Infinity, 
-                    repeatType: 'mirror',
-                    ease: "easeInOut"
+                    animate: {
+                      delay: index * 0.2, 
+                      duration: 6 + index, 
+                      repeat: Infinity, 
+                      repeatType: 'mirror',
+                      ease: "easeInOut"
+                    },
+                    initial: { duration: 0.5 }
                   }}
-                  className="absolute card w-52 overflow-hidden shadow-2xl border-surface-border/50"
+                  className="absolute card w-56 overflow-hidden shadow-2xl border-white/5 cursor-pointer backdrop-blur-md"
                   style={{ left: pos.left, top: pos.top }}
                 >
-                  <div className="h-28 w-full bg-surface-muted relative">
+                  <div className="h-32 w-full bg-surface-muted relative overflow-hidden">
                     <img 
                       src={recipe.image} 
                       alt={recipe.title} 
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   </div>
-                  <div className="p-3 bg-surface-card">
+                  <div className="p-4 bg-surface-card/80">
                     <p className="text-white font-semibold text-sm truncate">{recipe.title}</p>
-                    <div className="flex items-center justify-between mt-1 text-[10px] text-gray-400">
-                      <span>{recipe.tag}</span>
+                    <div className="flex items-center justify-between mt-2 text-[10px] text-gray-400 uppercase tracking-wider">
+                      <span className="bg-white/5 px-2 py-0.5 rounded-md">{recipe.tag}</span>
                       <span>{recipe.time}</span>
                     </div>
                   </div>
@@ -130,38 +173,53 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="pb-14">
-          <div className="grid md:grid-cols-2 gap-4">
+        <section className="pb-24">
+          <div className="grid md:grid-cols-2 gap-6">
             {FEATURES.map(({ title, description, icon: Icon }, index) => (
               <motion.div
                 key={title}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 + index * 0.08 }}
-                className="card p-5"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5, borderColor: 'rgba(255, 111, 60, 0.3)' }}
+                transition={{ delay: index * 0.1 }}
+                className="card p-6 group transition-all"
               >
-                <div className="w-10 h-10 rounded-xl bg-brand/15 border border-brand/25 flex items-center justify-center mb-3">
-                  <Icon className="w-5 h-5 text-brand" />
+                <div className="w-12 h-12 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-brand/20 transition-all duration-300">
+                  <Icon className="w-6 h-6 text-brand" />
                 </div>
-                <h3 className="text-white font-semibold">{title}</h3>
-                <p className="text-sm text-gray-400 mt-1.5 leading-relaxed">{description}</p>
+                <h3 className="text-white text-lg font-semibold group-hover:text-brand transition-colors">{title}</h3>
+                <p className="text-gray-400 mt-2 leading-relaxed">{description}</p>
               </motion.div>
             ))}
           </div>
         </section>
       </main>
 
-      <footer className="max-w-6xl mx-auto px-6 pb-12 pt-6 relative z-20 border-t border-surface-border/30">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <div className="flex items-center gap-2">
-            <span>Made with ❤️ by</span>
-            <span className="text-white font-semibold">Yash Mishra</span>
+      <footer className="max-w-6xl mx-auto px-6 pb-16 pt-10 relative z-20 border-t border-white/5">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 text-sm text-gray-500">
+          <div className="flex items-center gap-3">
+            <span className="opacity-60 font-medium italic">"By Foodie For Foodies"</span>
           </div>
-          <div className="px-4 py-1.5 rounded-full bg-brand/5 border border-brand/15 text-brand/80 font-medium tracking-wide">
-            "By Foodie For Foodies"
-          </div>
-          <div className="text-[11px] opacity-40">
-            © 2026 RecipeHub Project
+          
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-3 bg-white/5 px-5 py-2.5 rounded-2xl border border-white/5"
+          >
+            <span className="text-gray-400">Crafted with</span>
+            <motion.span 
+              animate={{ scale: [1, 1.2, 1] }} 
+              transition={{ repeat: Infinity, duration: 1.5 }}
+              className="text-red-500"
+            >
+              ❤️
+            </motion.span>
+            <span className="text-white font-display font-bold tracking-wide">Yash Mishra</span>
+          </motion.div>
+
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-white transition-colors">Twitter</a>
+            <a href="#" className="hover:text-white transition-colors">GitHub</a>
           </div>
         </div>
       </footer>
