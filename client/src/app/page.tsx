@@ -63,7 +63,7 @@ export default function HomePage() {
         />
       </div>
 
-      <header className="max-w-6xl mx-auto px-6 pt-8 pb-2 relative z-20 flex items-center justify-between">
+      <header className="max-w-6xl mx-auto px-6 pt-8 pb-2 relative z-50 flex items-center justify-between">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -80,14 +80,14 @@ export default function HomePage() {
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 relative z-50"
         >
-          <Link href="/login" className="btn-ghost py-2 px-4 text-sm">Sign in</Link>
-          <Link href="/signup" className="btn-primary py-2 px-4 text-sm shadow-lg shadow-brand/20">Get started</Link>
+          <Link href="/login" className="btn-ghost py-2 px-4 text-sm relative z-50">Sign in</Link>
+          <Link href="/signup" className="btn-primary py-2 px-4 text-sm shadow-lg shadow-brand/20 relative z-50">Get started</Link>
         </motion.div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 relative z-30">
+      <main className="max-w-6xl mx-auto px-6 relative z-40">
         <section className="pt-16 pb-20 grid lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -113,7 +113,7 @@ export default function HomePage() {
               understands your pantry.
             </p>
             <div className="flex flex-wrap gap-4 mt-10 relative z-50">
-              <Link href={user ? '/cook' : '/signup'} className="btn-primary inline-flex items-center justify-center gap-3 px-10 py-4 text-lg w-full sm:w-auto hover:scale-105 active:scale-95 transition-all shadow-xl shadow-brand/25 pointer-events-auto">
+              <Link href={user ? '/cook' : '/signup'} className="btn-primary inline-flex items-center justify-center gap-3 px-10 py-4 text-lg w-full sm:w-auto hover:scale-105 active:scale-95 transition-all shadow-xl shadow-brand/25 cursor-pointer relative z-50">
                 {user ? 'Continue cooking' : 'Start for free'} <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
@@ -124,7 +124,7 @@ export default function HomePage() {
             </div>
           </motion.div>
 
-          <div className="relative h-[480px] hidden lg:block pointer-events-none">
+          <div className="relative h-[480px] hidden lg:block z-10">
             {FLOATING_RECIPES.map((recipe, index) => {
               const positions = [
                 { left: '0%', top: '20px' },
