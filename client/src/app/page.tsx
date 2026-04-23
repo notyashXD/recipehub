@@ -161,11 +161,11 @@ export default function HomePage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                   </div>
-                  <div className="p-4 bg-surface-card/80">
-                    <p className="text-white font-semibold text-sm truncate">{recipe.title}</p>
-                    <div className="flex items-center justify-between mt-2 text-[10px] text-gray-400 uppercase tracking-wider">
-                      <span className="bg-white/5 px-2 py-0.5 rounded-md">{recipe.tag}</span>
-                      <span>{recipe.time}</span>
+                  <div className="p-4 bg-brand/5 dark:bg-surface-card/80 backdrop-blur-md">
+                    <p className="text-gray-900 dark:text-white font-semibold text-sm truncate">{recipe.title}</p>
+                    <div className="flex items-center justify-between mt-2 text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      <span className="bg-brand/10 dark:bg-white/5 px-2 py-0.5 rounded-md font-medium text-brand dark:text-gray-400">{recipe.tag}</span>
+                      <span className="font-medium">{recipe.time}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -189,38 +189,37 @@ export default function HomePage() {
                 <div className="w-12 h-12 rounded-2xl bg-brand/10 border border-brand/20 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-brand/20 transition-all duration-300">
                   <Icon className="w-6 h-6 text-brand" />
                 </div>
-                <h3 className="text-white text-lg font-semibold group-hover:text-brand transition-colors">{title}</h3>
-                <p className="text-gray-400 mt-2 leading-relaxed">{description}</p>
+                <h3 className="text-gray-900 dark:text-white text-lg font-semibold group-hover:text-brand transition-colors">{title}</h3>
+                <p className="text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">{description}</p>
               </motion.div>
             ))}
           </div>
         </section>
       </main>
 
-      <footer className="max-w-6xl mx-auto px-6 pb-16 pt-10 relative z-20 border-t border-white/5">
+      <footer className="max-w-6xl mx-auto px-6 pb-16 pt-10 relative z-20 border-t border-brand/10 dark:border-white/5">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 text-sm text-gray-500">
           <div className="flex items-center gap-3">
-            <span className="opacity-60 font-medium italic">"By Foodie For Foodies"</span>
+            <span className="opacity-60 font-medium italic text-gray-600 dark:text-gray-500">"By Foodie For Foodies"</span>
           </div>
           
           <motion.div 
             whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-3 bg-white/5 px-5 py-2.5 rounded-2xl border border-white/5"
+            className="flex items-center gap-3 bg-brand/5 dark:bg-white/5 px-5 py-2.5 rounded-2xl border border-brand/10 dark:border-white/5"
           >
-            <span className="text-gray-400">Crafted with</span>
+            <span className="text-gray-500 dark:text-gray-400">Crafted with</span>
             <motion.span 
               animate={{ scale: [1, 1.2, 1] }} 
               transition={{ repeat: Infinity, duration: 1.5 }}
-              className="text-red-500"
+              className="text-brand"
             >
               ❤️
             </motion.span>
-            <span className="text-white font-display font-bold tracking-wide">Yash Mishra</span>
+            <span className="text-gray-900 dark:text-white font-display font-bold tracking-wide">Yash Mishra</span>
           </motion.div>
 
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Twitter</a>
-            <a href="#" className="hover:text-white transition-colors">GitHub</a>
+            <a href="https://github.com/notyashXD/recipehub" target="_blank" rel="noopener noreferrer" className="hover:text-brand transition-colors font-medium text-gray-600 dark:text-gray-400">GitHub Repo</a>
           </div>
         </div>
       </footer>
