@@ -87,12 +87,11 @@ export default function CookPage() {
   };
 
   const surpriseMe = () => {
-    const source = filtered.length ? filtered : matches;
-    if (!source.length) {
-      toast.error('No recipes to surprise you with yet. Try Find Matches first.');
+    if (!filtered.length) {
+      toast.error(matches.length ? 'No recipes match your current filter.' : 'No recipes to surprise you with yet. Try Find Matches first.');
       return;
     }
-    const picked = source[Math.floor(Math.random() * source.length)];
+    const picked = filtered[Math.floor(Math.random() * filtered.length)];
     toast.success(`Surprise pick: ${picked.recipe.title}`);
     router.push(`/recipes/${picked.recipe._id}`);
   };
