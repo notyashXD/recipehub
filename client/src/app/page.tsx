@@ -73,11 +73,8 @@ export default function HomePage() {
               understands your pantry.
             </p>
             <div className="flex flex-wrap gap-3 mt-7">
-              <Link href={user ? '/cook' : '/signup'} className="btn-primary inline-flex items-center gap-2">
-                {user ? 'Continue cooking' : 'Start for free'} <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link href="/app" className="btn-ghost inline-flex items-center gap-2">
-                Open classic entry
+              <Link href={user ? '/cook' : '/signup'} className="btn-primary inline-flex items-center justify-center gap-2 px-10 py-3 text-lg w-full sm:w-auto">
+                {user ? 'Continue cooking' : 'Start for free'} <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
             <div className="mt-7 flex items-center gap-4 text-sm text-gray-400">
@@ -129,7 +126,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="pb-10">
+        <section className="pb-14">
           <div className="grid md:grid-cols-2 gap-4">
             {FEATURES.map(({ title, description, icon: Icon }, index) => (
               <motion.div
@@ -148,19 +145,7 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-
-        <section className="pb-14">
-          <div className="card p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div>
-              <p className="text-white font-semibold">Prefer the previous quick-entry flow?</p>
-              <p className="text-sm text-gray-400 mt-1">It still exists inside the product as the classic app entry route.</p>
-            </div>
-            <Link href="/app" className="btn-ghost inline-flex items-center gap-2">
-              Open classic entry <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
-      </main>
+      </main>n>
     </div>
   );
 }
