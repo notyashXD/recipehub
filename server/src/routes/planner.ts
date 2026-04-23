@@ -49,7 +49,10 @@ router.post('/:planId/meals', authMiddleware, async (req: AuthRequest, res: Resp
     const plan = await MealPlan.findOne({ _id: req.params.planId, user: req.userId });
     if (!plan) return res.status(404).json({ message: 'Plan not found' });
 
-    plan.meals.push(req.body);
+    const mealData = { ...req.body };
+    mealData.servings = Number(mealData.servings) || 1;
+
+    plan.meals.push(mealData);
     await plan.save();
     await plan.populate('meals.recipe', 'title images cuisine prepTime cookTime nutrition servings');
     res.json(plan);

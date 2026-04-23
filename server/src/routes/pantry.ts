@@ -24,16 +24,27 @@ router.post('/items', authMiddleware, async (req: AuthRequest, res: Response) =>
     let pantry = await Pantry.findOne({ user: req.userId });
     if (!pantry) pantry = await Pantry.create({ user: req.userId, items: [] });
 
+    const qty = Number(quantity) || 1;
+
     // Check for duplicate ingredient
     const existing = pantry.items.findIndex(
       (item) => item.ingredient.toLowerCase() === ingredient.toLowerCase()
     );
 
     if (existing >= 0) {
-      pantry.items[existing].quantity += quantity || 1;
+      pantry.items[existing].quantity += qty;
       if (expiryDate) pantry.items[existing].expiryDate = new Date(expiryDate);
     } else {
-      pantry.items.push({ ingredient, quantity: quantity || 1, unit: unit || 'piece', category: category || 'other', expiryDate: expiryDate ? new Date(expiryDate) : undefined, addedAt: new Date(), barcode, notes });
+      pantry.items.push({ 
+        ingredient, 
+        quantity: qty, 
+        unit: unit || 'piece', 
+        category: category || 'other', 
+        expiryDate: expiryDate ? new Date(expiryDate) : undefined, 
+        addedAt: new Date(), 
+        barcode, 
+        notes 
+      });
     }
 
     pantry.lastUpdated = new Date();
@@ -55,10 +66,11 @@ router.post('/items/bulk', authMiddleware, async (req: AuthRequest, res: Respons
       const existing = pantry.items.findIndex(
         (p) => p.ingredient.toLowerCase() === item.ingredient.toLowerCase()
       );
+      const qty = Number(item.quantity) || 1;
       if (existing >= 0) {
-        pantry.items[existing].quantity += item.quantity || 1;
+        pantry.items[existing].quantity += qty;
       } else {
-        pantry.items.push({ ...item, addedAt: new Date() });
+        pantry.items.push({ ...item, quantity: qty, addedAt: new Date() });
       }
     }
 

@@ -143,7 +143,10 @@ export default function FridgePage() {
                 <input className="input col-span-2" placeholder="Ingredient name *" value={form.ingredient}
                   onChange={e => setForm({ ...form, ingredient: e.target.value })} required />
                 <input type="number" className="input" placeholder="Quantity" value={form.quantity} min={0}
-                  onChange={e => setForm({ ...form, quantity: parseFloat(e.target.value) })} />
+                  onChange={e => {
+                    const val = parseFloat(e.target.value);
+                    setForm({ ...form, quantity: isNaN(val) ? 1 : val });
+                  }} />
                 <input className="input" placeholder="Unit (piece, g, ml...)" value={form.unit}
                   onChange={e => setForm({ ...form, unit: e.target.value })} />
                 <select className="input" value={form.category} onChange={e => setForm({ ...form, category: e.target.value })}>

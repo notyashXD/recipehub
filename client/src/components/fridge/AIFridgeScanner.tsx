@@ -63,9 +63,15 @@ export default function AIFridgeScanner({ onIngredientsConfirmed, onClose }: Pro
   const toggle = (idx: number) => setIngredients(i => i.map((ing, j) => j === idx ? { ...ing, selected: !ing.selected } : ing));
 
   const confirm = async () => {
-    const selected = ingredients.filter(i => i.selected).map(i => ({
-      ingredient: i.name, quantity: i.estimatedQuantity || 1, unit: i.unit || 'piece', category: i.category || 'other',
-    }));
+    const selected = ingredients.filter(i => i.selected).map(i => {
+      const qty = parseFloat(String(i.estimatedQuantity));
+      return {
+        ingredient: i.name, 
+        quantity: isNaN(qty) ? 1 : qty, 
+        unit: i.unit || 'piece', 
+        category: i.category || 'other',
+      };
+    });
     if (selected.length === 0) return toast.error('Select at least one ingredient');
     setAdding(true);
     try {
