@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className="bg-surface text-white">
@@ -35,13 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Toaster
           position="top-right"
           toastOptions={{
-            style: { 
-              background: '#1A1D27', 
-              color: '#F9FAFB', 
-              border: '1px solid #2A2D3A',
-              borderRadius: '16px',
-              fontFamily: 'Outfit, sans-serif'
-            },
+            style: { background: '#1A1D27', color: '#F9FAFB', border: '1px solid #2A2D3A' },
             success: { iconTheme: { primary: '#FF6B35', secondary: '#fff' } },
           }}
         />
