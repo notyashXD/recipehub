@@ -199,10 +199,54 @@ const fallbackChatAnswer = (question: string): string => {
   return "I'm having trouble reaching the AI service right now, but I can still help. Tell me your ingredients and preferred cuisine, and I'll suggest a practical recipe flow.";
 };
 
+const isGeminiUnavailableError = (err: unknown): boolean => {
+  const message = String((err as any)?.message || err || '').toLowerCase();
+  return (
+    message.includes('quota') ||
+    message.includes('429') ||
+    message.includes('resource_exhausted') ||
+    message.includes('all gemini api keys exhausted') ||
+    message.includes('gemini service is unavailable')
+  );
+};
+
+const fallbackSuggestions = (recipe: any) => {
+  const ingredientNames = recipe.ingredients.slice(0, 3).map((i: any) => i.name).join(', ');
+  return [
+    {
+      type: 'healthier',
+      title: `${recipe.title} Lite`,
+      changes: ['Use less oil or butter', 'Increase vegetables', 'Add lean protein where possible'],
+      reason: `Keeps the flavor profile while making ${ingredientNames || 'core ingredients'} lighter and more balanced.`,
+    },
+    {
+      type: 'quicker',
+      title: `${recipe.title} Express`,
+      changes: ['Prep ingredients in advance', 'Use one-pan workflow', 'Reduce simmering time by using pre-cooked components'],
+      reason: 'Cuts active cook time while preserving the recipe structure.',
+    },
+    {
+      type: 'gourmet',
+      title: `${recipe.title} Chef Edition`,
+      changes: ['Finish with fresh herbs', 'Add texture contrast', 'Plate with garnish and acidity'],
+      reason: 'Improves depth, presentation, and restaurant-style finish.',
+    },
+  ];
+};
+
 router.get('/status', async (_req: Request, res: Response) => {
   const health = getGeminiHealth();
   if (!health.configuredKeys) {
     return res.status(503).json({ ok: false, ...health, message: 'No Gemini API keys configured.' });
+  }
+
+  const shouldProbe = String((_req.query?.probe as string) || '').toLowerCase() === 'true';
+  if (!shouldProbe) {
+    return res.json({
+      ok: true,
+      ...health,
+      message: 'Gemini keys configured. Add ?probe=true to run a live API check.',
+    });
   }
 
   try {
@@ -214,7 +258,7 @@ router.get('/status', async (_req: Request, res: Response) => {
       ok: false,
       ...health,
       message: 'Gemini check failed.',
-      error: err?.message || 'Unknown error',
+      error: isGeminiUnavailableError(err) ? 'Quota or key availability issue detected.' : 'Probe failed.',
     });
   }
 });
@@ -278,7 +322,29 @@ Return ONLY a valid JSON object (no markdown, no extra text):
     res.json(recipe);
   } catch (err: any) {
     console.error('AI generate error:', err?.message || err);
-    res.status(500).json({ message: 'Failed to generate recipe', error: err?.message || 'Unknown error' });
+    if (isGeminiUnavailableError(err)) {
+      try {
+        const ingredients = uniqueStrings(req.body?.ingredients);
+        if (!ingredients.length) {
+          return res.status(400).json({ message: 'Please provide at least one ingredient.' });
+        }
+        const preferences = req.body?.preferences || {};
+        const normalized = normalizeRecipeData(null, ingredients, preferences);
+        const fallbackImage = `https://images.unsplash.com/800x600/?${encodeURIComponent(`${normalized.cuisine} food recipe`)}`;
+        const recipe = await Recipe.create({
+          ...normalized,
+          author: req.userId,
+          isAIGenerated: true,
+          isPublic: false,
+          images: normalized.images.length ? normalized.images : [fallbackImage],
+          tags: Array.from(new Set([...(normalized.tags || []), 'fallback-generated'])),
+        });
+        return res.json({ ...recipe.toObject(), aiFallback: true });
+      } catch (fallbackErr) {
+        console.error('AI fallback generate error:', fallbackErr);
+      }
+    }
+    res.status(500).json({ message: 'Failed to generate recipe. Please try again shortly.' });
   }
 });
 
@@ -311,7 +377,12 @@ Be specific. If unsure, make your best guess.`;
     res.json({ ingredients });
   } catch (err: any) {
     console.error('Extract ingredients error:', err?.message || err);
-    res.status(500).json({ message: 'Failed to extract ingredients', error: err?.message || 'Unknown error' });
+    if (isGeminiUnavailableError(err)) {
+      return res.status(503).json({
+        message: 'AI scanner is temporarily unavailable due to API quota. Please add ingredients manually for now.',
+      });
+    }
+    res.status(500).json({ message: 'Failed to extract ingredients. Please try again shortly.' });
   }
 });
 
@@ -338,7 +409,13 @@ Suggest 3 variations as a JSON array (no markdown, no extra text):
 
     res.json({ suggestions });
   } catch (err: any) {
-    res.status(500).json({ message: 'Failed to generate suggestions', error: err?.message || 'Unknown error' });
+    if (isGeminiUnavailableError(err)) {
+      const recipe = await Recipe.findById(req.body?.recipeId);
+      if (recipe) {
+        return res.json({ suggestions: fallbackSuggestions(recipe), aiFallback: true });
+      }
+    }
+    res.status(500).json({ message: 'Failed to generate suggestions. Please try again shortly.' });
   }
 });
 
@@ -394,7 +471,7 @@ Answer the question thoughtfully:`;
       });
     }
   } catch (err: any) {
-    res.status(500).json({ message: 'Failed to get answer', error: err?.message || 'Unknown error' });
+    res.status(500).json({ message: 'Failed to get answer. Please try again shortly.' });
   }
 });
 
