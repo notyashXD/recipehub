@@ -150,6 +150,21 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+
+      <footer className="max-w-6xl mx-auto px-6 pb-12 pt-6 relative z-20 border-t border-surface-border/30">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+          <div className="flex items-center gap-2">
+            <span>Made with ❤️ by</span>
+            <span className="text-white font-semibold">Yash Mishra</span>
+          </div>
+          <div className="px-4 py-1.5 rounded-full bg-brand/5 border border-brand/15 text-brand/80 font-medium tracking-wide">
+            "By Foodie For Foodies"
+          </div>
+          <div className="text-[11px] opacity-40">
+            © 2026 RecipeHub Project
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
