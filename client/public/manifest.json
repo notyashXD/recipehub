@@ -1,0 +1,16 @@
+{
+  "name": "RecipeHub — What Can I Cook?",
+  "short_name": "RecipeHub",
+  "description": "Smart recipe matching based on your fridge ingredients",
+  "start_url": "/cook",
+  "display": "standalone",
+  "background_color": "#0F1117",
+  "theme_color": "#FF6B35",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "categories": ["food", "lifestyle", "utilities"],
+  "screenshots": []
+}

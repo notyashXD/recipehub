@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+.theme-dark {
+  --brand: #ff6b35;
+  --forest: #2d4a3e;
+  --surface: #0f1117;
+  --card: #1a1d27;
+  --border: #2a2d3a;
+  --muted: #6b7280;
+  --text-primary: #f9fafb;
+  --text-muted: #9ca3af;
+  color-scheme: dark;
+}
+
+.theme-light {
+  --brand: #ff6b35;
+  --forest: #2d4a3e;
+  --surface: #f6f7fb;
+  --card: #ffffff;
+  --border: #d9dfeb;
+  --muted: #64748b;
+  --text-primary: #111827;
+  --text-muted: #4b5563;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: color-mix(in srgb, var(--card) 80%, black 20%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--muted) 70%, black 30%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand);
+}
+
+/* Custom utilities */
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .card {
+    @apply bg-surface-card border border-surface-border rounded-2xl;
+  }
+
+  .btn-primary {
+    @apply bg-brand hover:bg-brand-dark text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white font-medium px-5 py-2.5 rounded-xl transition-all duration-200 border border-white/10;
+  }
+
+  .input {
+    @apply bg-surface-card border border-surface-border rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand transition-colors w-full;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold;
+  }
+
+  .section-title {
+    @apply font-display text-2xl font-bold text-white;
+  }
+}
+
+/* Light-mode remapping for existing utility-heavy screens */
+.theme-light .card {
+  background-color: var(--card) !important;
+  border-color: var(--border) !important;
+}
+
+.theme-light .input {
+  background-color: var(--card) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+}
+
+.theme-light .btn-ghost {
+  background-color: #f1f5f9 !important;
+  border-color: var(--border) !important;
+  color: #334155 !important;
+}
+
+.theme-light .btn-ghost:hover {
+  background-color: #e7edf8 !important;
+  color: #0f172a !important;
+}
+
+.theme-light .glass {
+  background-color: rgba(248, 250, 252, 0.85) !important;
+  border-color: var(--border) !important;
+}
+
+.theme-light .bg-surface {
+  background-color: var(--surface) !important;
+}
+
+.theme-light .bg-surface-card {
+  background-color: var(--card) !important;
+}
+
+.theme-light .border-surface-border {
+  border-color: var(--border) !important;
+}
+
+.theme-light .text-white {
+  color: #0f172a !important;
+}
+
+.theme-light .text-gray-200 {
+  color: #1f2937 !important;
+}
+
+.theme-light .text-gray-300 {
+  color: #334155 !important;
+}
+
+.theme-light .text-gray-400 {
+  color: #475569 !important;
+}
+
+.theme-light .text-gray-500 {
+  color: #64748b !important;
+}
+
+.theme-light .text-gray-600 {
+  color: #475569 !important;
+}
+
+/* Match score ring animation */
+@keyframes ringFill {
+  from {
+    stroke-dashoffset: 283;
+  }
+  to {
+    stroke-dashoffset: var(--offset);
+  }
+}
+
+.ring-fill {
+  animation: ringFill 1s ease-out forwards;
+}
+
+/* Page transitions */
+.page-enter {
+  animation: slideUp 0.3s ease-out;
+}
