@@ -7,6 +7,8 @@ import { useAuthStore } from '@/stores/authStore';
 
 const FLOATING_RECIPES = [
   { title: 'Greek Salad', time: '10m', tag: 'Mediterranean', image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&v=2' },
+  { title: 'Margherita Pizza', time: '20m', tag: 'Italian', image: 'https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=800&v=3' },
+  { title: 'Paneer Tikka', time: '30m', tag: 'Indian', image: 'https://images.unsplash.com/photo-1599481238640-4c1288750d7a?w=800&v=3' },
   { title: 'Chocolate Lava Cake', time: '27m', tag: 'French', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&v=2' },
 ];
 
@@ -85,8 +87,10 @@ export default function HomePage() {
           <div className="relative h-[440px] hidden md:block">
             {FLOATING_RECIPES.map((recipe, index) => {
               const positions = [
-                { left: '15%', top: '40px' },
-                { left: '45%', top: '180px' },
+                { left: '5%', top: '20px' },
+                { left: '55%', top: '60px' },
+                { left: '15%', top: '210px' },
+                { left: '60%', top: '230px' },
               ];
               const pos = positions[index];
 
