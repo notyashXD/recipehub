@@ -40,8 +40,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-surface relative overflow-hidden">
-      <ThemeToggle className="absolute right-5 top-5 z-30" />
-
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
           animate={{ 
@@ -82,6 +80,7 @@ export default function HomePage() {
           animate={{ opacity: 1, x: 0 }}
           className="flex items-center gap-2 relative z-50"
         >
+          <ThemeToggle />
           <Link href="/login" className="btn-ghost py-2 px-4 text-sm relative z-50">Sign in</Link>
           <Link href="/signup" className="btn-primary py-2 px-4 text-sm shadow-lg shadow-brand/20 relative z-50">Get started</Link>
         </motion.div>
