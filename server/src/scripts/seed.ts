@@ -17,7 +17,7 @@ const RECIPES = [
     servings: 4,
     dietaryTags: [],
     tags: ['pasta', 'italian', 'classic'],
-    images: ['https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800'],
+    images: ['https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800'],
     nutrition: { calories: 520, protein: 22, carbs: 58, fat: 21, fiber: 3 },
     ingredients: [
       { name: 'spaghetti', quantity: 400, unit: 'g', category: 'grain', isOptional: false, substitutes: ['linguine'] },
@@ -45,7 +45,7 @@ const RECIPES = [
     servings: 4,
     dietaryTags: ['gluten-free'],
     tags: ['indian', 'chicken', 'curry'],
-    images: ['https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800'],
+    images: ['https://images.unsplash.com/photo-1603894584214-5d0420e14a28?w=800'],
     nutrition: { calories: 450, protein: 35, carbs: 20, fat: 22, fiber: 4 },
     ingredients: [
       { name: 'chicken breast', quantity: 700, unit: 'g', category: 'protein', isOptional: false, substitutes: [] },
@@ -133,7 +133,7 @@ const RECIPES = [
     servings: 4,
     dietaryTags: ['vegetarian', 'gluten-free'],
     tags: ['risotto', 'italian', 'mushroom'],
-    images: ['https://images.unsplash.com/photo-1476124369491-e7addf5db171?w=800'],
+    images: ['https://images.unsplash.com/photo-1534422298391-e4f8c170db06?w=800'],
     nutrition: { calories: 420, protein: 12, carbs: 62, fat: 14, fiber: 3 },
     ingredients: [
       { name: 'arborio rice', quantity: 300, unit: 'g', category: 'grain', isOptional: false, substitutes: [] },
@@ -163,7 +163,7 @@ const RECIPES = [
     servings: 4,
     dietaryTags: ['vegetarian', 'gluten-free', 'vegan'],
     tags: ['salad', 'healthy', 'quick'],
-    images: ['https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800'],
+    images: ['https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800'],
     nutrition: { calories: 180, protein: 7, carbs: 12, fat: 13, fiber: 3 },
     ingredients: [
       { name: 'tomato', quantity: 3, unit: 'piece', category: 'vegetable', isOptional: false, substitutes: [] },
@@ -278,7 +278,7 @@ const RECIPES = [
     servings: 4,
     dietaryTags: ['vegetarian'],
     tags: ['dessert', 'chocolate', 'cake'],
-    images: ['https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=800'],
+    images: ['https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800'],
     nutrition: { calories: 420, protein: 8, carbs: 45, fat: 24, fiber: 2 },
     ingredients: [
       { name: 'dark chocolate', quantity: 200, unit: 'g', category: 'other', isOptional: false, substitutes: [] },
